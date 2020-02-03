@@ -304,9 +304,9 @@ class Visualizer
 		end
 	end
 	
-	def clean_viz
+	def clean
 		begin
-			@stdin.write "cls"
+			@stdin.write "cls\n"
 		rescue
 			return "exit"
 		end
@@ -449,6 +449,7 @@ class	Vm_filler
 		end
 		viz = Proc.new do |av|
 			$viz_path = av
+			self.verbose = 0
 		end
 		func = {
 			"-v" => viz,
@@ -569,14 +570,16 @@ if __FILE__ == $0
 		end
 
 		if $viz_path != nil
-			test = Visualizer.new($viz_path, 500, 500)
-			test.launch
-			test.write_to_viz "Hello from Ruby Scope !\n"
-			test.clean_viz
+			iz = Visualizer.new($viz_path, 500, 500)
+			viz.launch
 		end
 
 		while all_lose(players, trace)
 			for player in players
+			#	if $viz_path != nil
+					#viz.clean
+					#map.show_mapcontent(viz.stdin)
+			#	end
 				if (player.live > 0)
 					map.gene_piece()
                                   begin
