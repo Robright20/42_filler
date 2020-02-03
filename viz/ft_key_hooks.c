@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_key_hooks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/01 11:32:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/02 00:18:56 by fokrober         ###   ########.fr       */
+/*   Created: 2020/01/18 03:55:27 by fokrober          #+#    #+#             */
+/*   Updated: 2020/02/03 05:41:34 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "fractol.h"
 
-int		main(void)
+int		clamp(int val, float v_min, int v_max)
 {
-	static int a = 0;
+	if (val == v_max)
+		val = v_min;
+	return (fmax(v_min, fmin(v_max, val)));
+}
 
-	if (a)
-		;
-	else
-		write(STDOUT, "3 8\n", 4);
-	a++;
+
+int		ft_keypress(int keycode, void *params)
+{
+	t_env	*env;
+
+	env = (t_env *)params;
+	(void)keycode;
 	return (0);
 }

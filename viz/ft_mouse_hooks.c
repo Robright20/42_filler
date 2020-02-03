@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_mouse_hooks.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/01 11:32:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/02 00:18:56 by fokrober         ###   ########.fr       */
+/*   Created: 2020/01/18 03:54:08 by fokrober          #+#    #+#             */
+/*   Updated: 2020/02/03 05:42:11 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "fractol.h"
 
-int		main(void)
+double	interp(double start, double end, double interpol)
 {
-	static int a = 0;
+	return (start + ((end - start) * interpol));
+}
 
-	if (a)
-		;
-	else
-		write(STDOUT, "3 8\n", 4);
-	a++;
+int		ft_mouse_mv(int x, int y, void *params)
+{
+	t_env	*env;
+
+	env = (t_env *)params;
+	(void)(x && y);
+	return (0);
+}
+
+int		ft_mouse(int button, int x, int y, void *params)
+{
+	t_env	*env;
+
+	env = (t_env *)params;
+	(void)(button || (x && y));
 	return (0);
 }

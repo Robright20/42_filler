@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   viz.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/01 11:32:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/02 00:18:56 by fokrober         ###   ########.fr       */
+/*   Created: 2020/02/03 02:59:24 by fokrober          #+#    #+#             */
+/*   Updated: 2020/02/03 04:14:03 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
-
-int		main(void)
-{
-	static int a = 0;
-
-	if (a)
-		;
-	else
-		write(STDOUT, "3 8\n", 4);
-	a++;
-	return (0);
-}
+#ifndef VIZ_H
+# define VIZ_H
+# include "../filler.h"
+# include <stdio.h>
+#endif
