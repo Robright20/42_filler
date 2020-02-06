@@ -6,13 +6,14 @@
 #    By: fokrober <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 15:30:34 by fokrober          #+#    #+#              #
-#    Updated: 2020/02/03 05:38:17 by fokrober         ###   ########.fr        #
+#    Updated: 2020/02/07 00:13:48 by fokrober         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = viz
 
-SRC = viz.c drawline.c ft_setup.c ft_hooks.c ft_key_hooks.c ft_mouse_hooks.c
+SRC = viz.c drawline.c ft_setup.c ft_hooks.c ft_key_hooks.c ft_mouse_hooks.c \
+	  libviz.c
 OBJ = $(SRC:.c=.o)
 
 

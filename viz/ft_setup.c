@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 01:52:51 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/03 06:55:09 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/06 18:43:48 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ t_img	*ft_new_image(void *mlx_ptr, int width, int height, t_garb *g)
 	img->ptr = mlx_new_image(mlx_ptr, width, height);
 	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->line,
 			&img->endian);
-	img->bounds.v1 = (t_fvec2){0, width};
-	img->bounds.v2 = (t_fvec2){0, height};
+	img->size = (t_ivec2){width, height};
 	return (img);
 }
 
@@ -50,26 +49,35 @@ t_env	*ft_new_env(char *title, int width, int height, t_garb *g)
 	return (env);
 }
 
-void	ft_border_img(t_img *img)
+void	ft_border_img(t_img *img, int color)
 {
 	t_point		p0;
 	t_point		p1;
 	t_point		p2;
 	t_point		p3;
 
-	p0 = (t_point){0, 0, 0, 0xffffff};
-	p1 = (t_point){IMAGE_X - 1, 0, 0, 0xffffff};
-	p2 = (t_point){0, IMAGE_Y - 1, 0, 0xffffff};
-	p3 = (t_point){IMAGE_X - 1, IMAGE_Y - 1, 0, 0xffffff};
+	p0 = (t_point){0, 0, 0, color};
+	p1 = (t_point){img->size.x - 1, 0, 0, color};
+	p2 = (t_point){0, img->size.y - 1, 0, color};
+	p3 = (t_point){img->size.x - 1, img->size.y - 1, 0, color};
 	draw_line_img(img, p0, p1);
 	draw_line_img(img, p0, p2);
 	draw_line_img(img, p2, p3);
 	draw_line_img(img, p1, p3);
 }
 
-void	ft_setup(t_env **env, t_ivec2 *win, char *title, t_garb *g)
+void	ft_setup(t_env **env, t_ivec2 *win, char **av, t_garb *g)
 {
-	*env = ft_new_env(title, win->x, win->y, g);
+	int		fd;
+
+	if ((fd = open(av[1], O_RDONLY)) < 0)
+		exit (EXIT_FAILURE);
+	*env = ft_new_env("Filler :: Viz", win->x, win->y, g);
+	(*env)->maps_nb = ft_atoi(av[2]);
+	(*env)->dim.x = ft_atoi(av[3]);
+	(*env)->dim.y = ft_atoi(av[4]);
+	(*env)->log_file_fd = fd;
+	(*env)->imgs = (t_img **)ft_memalloc((*env)->maps_nb * sizeof(t_img *));
 }
 
 void	set_pixel_img(t_img *img, int x, int y, int color)

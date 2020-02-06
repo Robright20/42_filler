@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 19:18:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/03 05:36:16 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/07 00:12:53 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,13 @@ struct			s_env
 {
 	void	*ptr;
 	void	*win;
-	char	*title;
+	int		maps_nb;
+	int		log_file_fd;
+	t_ivec2	dim;
 	t_ivec2	size;
 	t_garb	*garb;
-	t_img	*img;
+	t_img	**imgs;
+	char	*title;
 };
 struct			s_img
 {
@@ -109,7 +112,8 @@ struct			s_img
 	int		bpp;
 	int		line;
 	int		endian;
-	t_fvec4 bounds;
+	t_ivec2	size;
+	char	*buf;
 };
 enum		e_fractals
 {
@@ -126,7 +130,7 @@ enum		e_mouse_key
 };
 int				ft_imap(int nbr, t_ivec2 b1, t_ivec2 b2);
 double			ft_fmap(double nbr, t_fvec2 b1, t_fvec2 b2);
-void			ft_setup(t_env **env, t_ivec2 *win, char *title, t_garb *g);
+void			ft_setup(t_env **env, t_ivec2 *win, char **av, t_garb *g);
 void			ft_draw(t_img *img, t_set *set, t_env *env);
 void			free_images(t_list *images);
 void			set_pixel_img(t_img *img, int x, int y, int color);
@@ -136,6 +140,7 @@ int				ft_mouse_mv(int x, int y, void *params);
 t_env			*ft_new_env(char *title, int width, int height, t_garb *g);
 t_img			*ft_new_image(void *mlx_ptr, int width, int height, t_garb *g);
 void			draw_line_img(t_img *img, t_point p1, t_point p2);
-void			ft_border_img(t_img *img);
+void			ft_border_img(t_img *img, int color);
+void			ft_apply_buf(t_env *env, int i);
 int				ft_exit(void *params);
 #endif

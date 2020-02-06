@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 20:29:23 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/03 05:36:30 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/06 18:39:18 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		ft_exit(void *params)
 		free(params);
 		exit(0);
 	}
+	close(env->log_file_fd);
 	free(params);
 	return (0);
 }
