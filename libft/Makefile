@@ -6,7 +6,7 @@
 #    By: fokrober <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 15:30:34 by fokrober          #+#    #+#              #
-#    Updated: 2020/01/23 14:59:25 by fokrober         ###   ########.fr        #
+#    Updated: 2020/02/10 16:40:49 by fokrober         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,18 +31,25 @@ SRC = ft_isdigit.c ft_lstmap.c ft_memdel.c  ft_next_char.c ft_putnbr_fd.c \
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
-HDR = libft.h
+CC = gcc
+HEADER = libft.h
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HDR)
+$(NAME): $(OBJ) $(HEADER)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
+	@echo "\033[1;34m↝ libft is compiled\033[0m"
+
+%.o: %.c libft.h
+	$(CC) $(CFLGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
+	@echo "\033[1;34m↝ libft is clean\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
+	@echo "\033[1;34m↝ libft is fclean\033[0m"
 
 re: fclean all

@@ -6,41 +6,33 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:32:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/04 09:14:39 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/11 02:18:58 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
+int		fd;
+
 int		main(void)
 {
 	char	*line;
-	int		fd;
-	char	**tab;
-	int		size;
+	int		player_num;
+	int		ret;
+	t_map 	map;
 
-	line = NULL;
-	tab = NULL;
-	fd = open("filler.h", O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
-	{
-		size = 0;
-		while (tab && tab[size])
-			size++;
-		tab = (char **)ft_realloc(tab, (size + 1) * sizeof(char*), (size + 2) * sizeof(char*));
-		tab[size] = line;
-		tab[size + 1] = NULL;
-	}
-	size = 0;
-	while (tab[size])
-	{
-		ft_putendl(tab[size]);
-		free(tab[size]);
-		size++;
-	}
-	free(tab);
-	tab = NULL;
-	line = NULL;
+	fd = open("results", O_RDWR);
+	if (fd < 0)
+		exit(EXIT_FAILURE);
+	ret = get_next_line(STDIN, &line);
+	dprintf(fd, "%s\n", line);
+	get_player_number(line, &player_num);
+	free(line);
+
+	ret = get_next_line(STDIN, &line);
+	dprintf(fd, "%s\n", line);
+	get_map(line, &map);
+	dprintf(fd, "rows %d, cols %d\n", map.cols, map.rows);
 	close(fd);
 	return (0);
 }

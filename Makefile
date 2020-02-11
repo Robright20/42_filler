@@ -6,41 +6,43 @@
 #    By: fokrober <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 15:30:34 by fokrober          #+#    #+#              #
-#    Updated: 2020/02/03 05:11:00 by fokrober         ###   ########.fr        #
+#    Updated: 2020/02/10 20:00:07 by fokrober         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fokrober.filler
 
-SRC = main.c
+SRC = main.c parser.c
 OBJ = $(SRC:.c=.o)
 
-
 HEADER = filler.h
-FTLIB = libft/libft.a
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-CM = gcc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror 
+LDFLAGS = -L$(LIBFT_DIR)
+LDLIBS = -lft
 
 # =========================================================================== #
 
-all: $(NAME)
+all: depbuild $(NAME)
 
-$(NAME): $(OBJ) $(HEADER) $(FTLIB)
-	@$(CM) $(OBJ) $(FTLIB) -o $(NAME)
+depbuild:
+	@make -C $(LIBFT_DIR)
+
+$(NAME): $(OBJ) $(HEADER) 
+	$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "\033[1;32m↝ filler is compiled\033[0m"
-
-$(FTLIB):
-	make -C libft
 
 clean:
 	@rm -f $(OBJ)
-	@make -C libft clean
+	@make -C $(LIBFT_DIR) clean
 	@echo "\033[1;32m↝ clean is done\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@make -C libft fclean
+	@make -C $(LIBFT_DIR) fclean
 	@echo "\033[1;32m↝ fclean is done\033[0m"
 
 re: fclean all
