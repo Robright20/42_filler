@@ -20,19 +20,43 @@ int		main(void)
 	int		player_num;
 	int		ret;
 	t_map 	map;
-
-	fd = open("results", O_RDWR);
+	int		i;
+	
+	fd = open("results", O_RDWR | O_CREAT);
 	if (fd < 0)
 		exit(EXIT_FAILURE);
 	ret = get_next_line(STDIN, &line);
 	dprintf(fd, "%s\n", line);
 	get_player_number(line, &player_num);
-	free(line);
+	
 
 	ret = get_next_line(STDIN, &line);
 	dprintf(fd, "%s\n", line);
 	get_map(line, &map);
 	dprintf(fd, "rows %d, cols %d\n", map.cols, map.rows);
-	close(fd);
+	ret = get_next_line(STDIN, &line);
+	i = 0;
+	while (i < 4)
+	{
+		if (line[i++] != ' ')
+			break ;
+	}
+	if (i != 4)
+		exit(EXIT_FAILURE);
+	while (1)
+	{
+		i = 0;
+		while (i < 3)
+		{
+			if (!ft_isdigit(line[i]))
+				break ;
+		}
+		if (i != 3 || line[4] != ' ')
+			exit(EXIT_FAILURE);
+		free(line);
+		ret = get_next_line(STDIN, &line);
+	}
+	free(line);
+	close (fd);
 	return (0);
 }
