@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:31:48 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/10 21:39:47 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/12 02:44:19 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ struct	s_map
 enum	e_std_stream {STDIN, STDOUT, STDERR};
 void	get_player_number(char *line, int *player_num);
 void	ft_putdstr(int fd, char *s);
-void	get_map(char *line, t_map *map);
+void	get_map_dim(char *line, t_map *map);
+void	get_map_content(int fd, t_map *map);
 #endif
