@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "filler.h"
-int	fd;
+int	fderr;
 
 int		ft_isnumber(char *s)
 {
@@ -46,6 +46,36 @@ void	ft_memdel2d(void **mem)
 	}
 }
 
+void	ft_putstr_map(t_map *map, int stream)
+{
+	int		k;
+
+	k = 0;
+	while (k < map->size)
+	{
+		dprintf(stream, "%.*s\n", map->cols, &(map->content[k]));
+		k += map->cols;
+	}
+}
+
+void	ft_putnbr_map(t_map *map, int stream)
+{
+	int		k;
+	int		i;
+
+	k = 0;
+	while (k < map->size)
+	{
+		i = -1;
+		while (++i < map->cols)
+		{
+			ft_putnbr_fd(map->content[k], stream);
+		}
+		ft_putstr_fd("\n", stream);
+		k++;
+	}
+}
+
 void	get_player_number(char *line, int *player_num)
 {
 	static t_string expect = (t_string){"$$$ exec p", 10};
@@ -71,20 +101,22 @@ int		ft_validline(int cols, char *line)
 	return (cols == (int)ft_strlen(line));
 }
 
-void	get_map_content(int ft_stdin, t_map *map)
+void	get_map_content(t_map *map)
 {
 	char	*s;
 	char	*line;
+	int		i;
 
-	if (get_next_line(ft_stdin, &line) <= 0)
+	if (get_next_line(STDIN, &line) <= 0)
 		exit(EXIT_FAILURE);
 	s = ft_strtrim(line);
+	i = map->rows;
 	if (map->cols == (int)ft_strlen(s) && ft_isnumber(s))
 	{
 		free(s);
 		free(line);
 		map->content = (char*)ft_memalloc(map->rows * map->cols + 1);
-		while (get_next_line(ft_stdin, &line) > 0 && (int)ft_strlen(line) > map->cols)
+		while (i-- && get_next_line(STDIN, &line) > 0 && (int)ft_strlen(line) > map->cols)
 		{
 			line[3] = '\0';
 			if (!(ft_isnumber(line) || !ft_validline(map->cols, &line[4])))
@@ -92,7 +124,7 @@ void	get_map_content(int ft_stdin, t_map *map)
 			ft_strcat(map->content, &line[4]);
 			free(line);
 		}
-		dprintf(fd, "%s", map->content);
+		// dprintf(fderr, "%s", map->content);
 	}
 	else
 		exit(EXIT_FAILURE);
@@ -115,6 +147,7 @@ void	get_map_dim(char *line, t_map *map)
 		{
 			map->rows = ft_atoi(tab[0]);
 			map->cols = ft_atoi(tab[1]);
+			map->size = map->rows * map->cols;
 			ft_memdel2d((void**)tab);
 		}
 	}

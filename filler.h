@@ -18,7 +18,6 @@
 # define FILLER_H
 #include <errno.h>
 
-typedef enum e_std_stream	t_std_stream;
 typedef struct s_map		t_map;
 
 struct	s_map
@@ -29,9 +28,19 @@ struct	s_map
 	int		cols;
 };
 
-enum	e_std_stream {STDIN, STDOUT, STDERR};
+enum	e_stream {STDIN, STDOUT, STDERR};
+extern	int g_fderr;
 void	get_player_number(char *line, int *player_num);
 void	ft_putdstr(int fd, char *s);
 void	get_map_dim(char *line, t_map *map);
-void	get_map_content(int fd, t_map *map);
+void	get_map_content(t_map *map);
+void	f_get_token(t_map *token);
+int		ft_isnumber(char *s);
+int		ft_validline(int cols, char *line);
+int		ft_tab2dlen(void *tab);
+void	ft_memdel2d(void **mem);
+void	ft_putstr_map(t_map *map, int stream);
+void	ft_putnbr_map(t_map *map, int stream);
+void	get_token_dim(char *line, t_map *token);
+void    ft_heatmap(t_map *map, t_map *token, int player);
 #endif

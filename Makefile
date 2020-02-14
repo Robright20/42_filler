@@ -12,7 +12,7 @@
 
 NAME = fokrober.filler
 
-SRC = main.c parser.c
+SRC = main.c parser.c get_token.c ft_heatmap.c
 OBJ = $(SRC:.c=.o)
 
 HEADER = filler.h
