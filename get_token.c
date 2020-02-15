@@ -61,3 +61,8 @@ void	get_token_dim(char *line, t_map *token)
 		exit(EXIT_FAILURE);
 	}
 }
+/*
+void	ft_remove_pad(t_map *token)
+{
+	;
+}*/

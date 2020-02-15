@@ -53,7 +53,7 @@ void	ft_putstr_map(t_map *map, int stream)
 	k = 0;
 	while (k < map->size)
 	{
-		dprintf(stream, "%.*s\n", map->cols, &(map->content[k]));
+		dprintf(stream, "[%.*s]\n", map->cols, &(map->content[k]));
 		k += map->cols;
 	}
 }
@@ -69,10 +69,10 @@ void	ft_putnbr_map(t_map *map, int stream)
 		i = -1;
 		while (++i < map->cols)
 		{
-			ft_putnbr_fd(map->content[k], stream);
+			dprintf(stream, "%3d", map->content[k]);
+			k++;
 		}
 		ft_putstr_fd("\n", stream);
-		k++;
 	}
 }
 

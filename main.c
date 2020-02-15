@@ -42,8 +42,8 @@ int		main(void)
 	free(line);
 	f_get_token(&token);
 	ft_heatmap(&map, &token, player_num);
-	//ft_putmap(&token, g_fderr);
-	ft_putstr_map(&map, g_fderr);
+	ft_putstr_map(&token, g_fderr);
+	//ft_putnbr_map(&map, g_fderr);
 
 	close(g_fderr);
 	return (0);

@@ -43,4 +43,5 @@ void	ft_putstr_map(t_map *map, int stream);
 void	ft_putnbr_map(t_map *map, int stream);
 void	get_token_dim(char *line, t_map *token);
 void    ft_heatmap(t_map *map, t_map *token, int player);
+void	ft_remove_pad(t_map *token);
 #endif
