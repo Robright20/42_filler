@@ -6,7 +6,7 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:59:28 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/18 13:52:24 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/19 21:54:08 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,31 @@ void	ft_putnbr_map(t_map *map, int stream)
 		i = -1;
 		while (++i < map->cols)
 		{
-			dprintf(stream, "%3d", map->content[k]);
+			dprintf(stream, "%3d", map->heatmap[k]);
 			k++;
 		}
 		ft_putstr_fd("\n", stream);
 	}
 }
 
-void	get_player_number(char *line, int *player_num)
+void	get_player_number(char *line, int *player_num, char *pname)
 {
 	static t_string expect = (t_string){"$$$ exec p", 10};
+	char			*s;
+	char			*str;
 	
-	if (ft_strncmp(expect.s, line, expect.size) != 0)
+	s = ft_strnew(ft_strlen(pname) + 2);
+	ft_sprintf(s, "[%s]", pname);
+	str = ft_strchr(line, '[');
+	if (ft_strncmp(expect.s, line, expect.size) != 0 || !ft_strequ(str, s))
 	{
 		ft_putstr_fd("error player number !\n", STDERR);
+		free(s);
 		exit(EXIT_FAILURE);
 	}
 	else
-		*player_num = ft_atoi(&line[expect.size]); 
+		*player_num = ft_atoi(&line[expect.size]);
+	free(s);
 }
 
 int		ft_validline(int cols, char *line)
@@ -125,7 +132,7 @@ void	get_map_content(t_map *map)
 			ft_strcat(map->content, &line[4]);
 			free(line);
 		}
-		// dprintf(fderr, "%s", map->content);
+		//dprintf(fderr, "%s", map->content);
 	}
 	else
 		exit(EXIT_FAILURE);

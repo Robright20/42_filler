@@ -6,13 +6,13 @@
 #    By: fokrober <robright28@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 15:30:34 by fokrober          #+#    #+#              #
-#    Updated: 2020/02/17 23:19:56 by fokrober         ###   ########.fr        #
+#    Updated: 2020/02/19 21:56:02 by fokrober         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fokrober.filler
 
-SRC = main.c parser.c get_token.c ft_heatmap.c ft_solve.c
+SRC = main.c parser.c get_token.c ft_heatmap.c ft_solve.c ft_sprintf.c
 OBJ = $(SRC:.c=.o)
 
 HEADER = filler.h
@@ -20,7 +20,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -L$(LIBFT_DIR)
 LDLIBS = -lft
 

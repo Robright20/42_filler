@@ -19,23 +19,25 @@ void    init_map(t_map *map, int player)
     
     while(1)
     {
-        first_o = ft_strchr_casei(map->content, 'o');
-        first_x = ft_strchr_casei(map->content, 'x');
-        if (!first_o || !first_x)
+        first_o = ft_strchr_casei(map->heatmap, 'o');
+        first_x = ft_strchr_casei(map->heatmap, 'x');
+        if (!first_o && !first_x)
             break ;
-        *first_o = (player == 1) ? -1 : 1;
-        *first_x = (player == 2) ? -1 : 1;
+        if (first_o)
+            *first_o = (player == 1) ? -1 : 1;
+        if (first_x)
+            *first_x = (player == 2) ? -1 : 1;
     }
 }
 
 void    place_closer(t_map *map, int index, int value)
 {
-    if ((index % map->cols) && map->content[index - 1] == '.')
-        map->content[index - 1] = value;
-    if ((index % map->cols < map->cols - 1) && map->content[index + 1] == '.')
-        map->content[index + 1] = value;
-    if (map->content[index] == '.')
-        map->content[index] = value;
+    if ((index % map->cols) && map->heatmap[index - 1] == '.')
+        map->heatmap[index - 1] = value;
+    if ((index % map->cols < map->cols - 1) && map->heatmap[index + 1] == '.')
+        map->heatmap[index + 1] = value;
+    if (map->heatmap[index] == '.')
+        map->heatmap[index] = value;
 }
 
 void    place_around(t_map *map, int index, int value)
@@ -54,9 +56,9 @@ void    ft_heatmap(t_map *map, t_map *token, int player)
     int     state;
     
     (void)token;
+    map->heatmap = ft_strdup(map->content);
     init_map(map, player);
     c = 1;
-    index = 0;
     state = 1;
     while (state)
     {
@@ -64,7 +66,7 @@ void    ft_heatmap(t_map *map, t_map *token, int player)
         index = 0;
         while (index < map->size)
         {
-            if (map->content[index] == c)
+            if (map->heatmap[index] == c)
             {
                 place_around(map, index, c + 1);
                 state = 1;
