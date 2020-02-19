@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:59:28 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/12 23:07:01 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/18 13:52:24 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	get_map_content(t_map *map)
 		free(s);
 		free(line);
 		map->content = (char*)ft_memalloc(map->rows * map->cols + 1);
+		map->charset = MAP_CHARSET;
 		while (i-- && get_next_line(STDIN, &line) > 0 && (int)ft_strlen(line) > map->cols)
 		{
 			line[3] = '\0';

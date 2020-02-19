@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fokrober <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: fokrober <robright28@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 15:30:34 by fokrober          #+#    #+#              #
-#    Updated: 2020/02/10 20:00:07 by fokrober         ###   ########.fr        #
+#    Updated: 2020/02/17 23:19:56 by fokrober         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fokrober.filler
 
-SRC = main.c parser.c get_token.c ft_heatmap.c
+SRC = main.c parser.c get_token.c ft_heatmap.c ft_solve.c
 OBJ = $(SRC:.c=.o)
 
 HEADER = filler.h

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:32:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/13 21:49:17 by zael-mab         ###   ########.fr       */
+/*   Updated: 2020/02/19 01:09:55 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,18 @@ int		main(void)
 	get_token_dim(line , &token);
 	free(line);
 	f_get_token(&token);
-	ft_heatmap(&map, &token, player_num);
+	t_ivec2 next_move;
+	token.offset = 0;
+	while ((ret = get_next_move(&token, &next_move)) > 0)
+	{
+		//dprintf(g_fderr, "t_x %d\tt_y %d\n", next_move.x, next_move.y);
+	}
+	//ft_heatmap(&map, &token, player_num);
+	token.offset = 0;
+	map.offset = 0;
+	ft_solve(&map, &token, -1);
+	ft_putstr_map(&map, g_fderr);
 	ft_putstr_map(&token, g_fderr);
-	//ft_putnbr_map(&map, g_fderr);
-
 	close(g_fderr);
 	return (0);
 }

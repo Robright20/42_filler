@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zael-mab <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 23:16:20 by zael-mab          #+#    #+#             */
-/*   Updated: 2020/02/13 01:04:27 by zael-mab         ###   ########.fr       */
+/*   Updated: 2020/02/18 13:53:58 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void        f_get_token(t_map *token)
 	i = token->rows;
 	j = 0;
 	token->content = (char*)ft_memalloc(token->rows * token->cols + 1);
+	token->charset = TOKEN_CHARSET;
 	while (i-- && get_next_line(STDIN, &line) > 0)
 	{
 		while (line[j])
@@ -32,7 +33,6 @@ void        f_get_token(t_map *token)
 		ft_strcat(token->content, line);
 		free(line);
 	}
-	//dprintf(g_fderr, "%s", token->content);
 }
 
 void	get_token_dim(char *line, t_map *token)
@@ -54,15 +54,9 @@ void	get_token_dim(char *line, t_map *token)
 			ft_memdel2d((void**)tab);
 		}
 	}
-    // dprintf(g_fderr, "\nr%d | l%d\n", token->rows, token->cols);
 	if (token->rows == 0 || token->cols == 0) 
 	{
 		ft_putstr_fd("error token !\n", g_fderr);
 		exit(EXIT_FAILURE);
 	}
 }
-/*
-void	ft_remove_pad(t_map *token)
-{
-	;
-}*/

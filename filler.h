@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:31:48 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/12 02:44:19 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/18 13:56:35 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,27 @@
 # include <string.h>
 # include <stdio.h>
 # define FILLER_H
+# define MAP_CHARSET ".xXoO"
+# define TOKEN_CHARSET "*"
 #include <errno.h>
 
 typedef struct s_map		t_map;
+typedef struct s_ivec2		t_ivec2;
 
 struct	s_map
 {
-	char	*content;
-	int		size;
-	int		rows;
-	int		cols;
+	char		*content;
+	int			size;
+	int			rows;
+	int			cols;
+	int			offset;
+	const char	*charset;
+};
+
+struct	s_ivec2
+{
+	int x;
+	int y;
 };
 
 enum	e_stream {STDIN, STDOUT, STDERR};
@@ -43,5 +54,6 @@ void	ft_putstr_map(t_map *map, int stream);
 void	ft_putnbr_map(t_map *map, int stream);
 void	get_token_dim(char *line, t_map *token);
 void    ft_heatmap(t_map *map, t_map *token, int player);
-void	ft_remove_pad(t_map *token);
+void	ft_solve(t_map *map, t_map *token, int player);
+int		get_next_move(t_map *map, t_ivec2 *next_move);
 #endif
