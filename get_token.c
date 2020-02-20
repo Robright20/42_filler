@@ -6,7 +6,7 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 23:16:20 by zael-mab          #+#    #+#             */
-/*   Updated: 2020/02/19 21:54:04 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/20 12:08:22 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void        f_get_token(t_map *token)
 	i = token->rows;
 	j = 0;
 	token->content = (char*)ft_memalloc(token->rows * token->cols + 1);
+	token->heatmap = NULL;
 	token->charset = TOKEN_CHARSET;
 	while (i-- && get_next_line(STDIN, &line) > 0)
 	{
@@ -56,7 +57,7 @@ void	get_token_dim(char *line, t_map *token)
 	}
 	if (token->rows == 0 || token->cols == 0) 
 	{
-		ft_putstr_fd("error token !\n", g_fderr);
+		ft_putstr_fd("error token !\n", STDERR);
 		exit(EXIT_FAILURE);
 	}
 }

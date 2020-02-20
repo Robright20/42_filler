@@ -6,11 +6,12 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:59:28 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/19 21:54:08 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/20 09:49:20 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
 int	fderr;
 
 int		ft_isnumber(char *s)
@@ -132,7 +133,6 @@ void	get_map_content(t_map *map)
 			ft_strcat(map->content, &line[4]);
 			free(line);
 		}
-		//dprintf(fderr, "%s", map->content);
 	}
 	else
 		exit(EXIT_FAILURE);

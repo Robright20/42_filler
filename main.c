@@ -6,54 +6,52 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:32:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/20 00:22:30 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/20 12:58:43 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		g_fderr;
+void	ft_setup(t_map *map, t_map *token, int *player_num)
+{
+	char	*line;
+
+	ft_bzero(map, sizeof(t_map));
+	ft_bzero(token, sizeof(t_map));
+	if (get_next_line(STDIN, &line) <= 0)
+		exit(EXIT_FAILURE);
+	get_map_dim(line, map);
+	free(line);
+	get_map_content(map);
+	if (get_next_line(STDIN, &line) <= 0)
+		exit(EXIT_FAILURE);
+	get_token_dim(line, token);
+	free(line);
+	f_get_token(token);
+	ft_heatmap(map, *player_num);
+}
 
 int		main(int ac, char **av)
 {
 	char	*line;
 	int		player_num;
-	int		ret;
-	t_map 	map;
-	t_map 	token;
+	t_map	map;
+	t_map	token;
 
-	g_fderr = open("results", O_RDWR | O_CREAT);
-	if (g_fderr < 0)
-		exit(EXIT_FAILURE);
 	player_num = 0;
 	if (player_num == 0)
 	{
-		ret = get_next_line(STDIN, &line);
+		if (get_next_line(STDIN, &line) <= 0)
+			exit(EXIT_FAILURE);
 		get_player_number(line, &player_num, av[0]);
-		//ft_putstr_fd(line, g_fderr);
 		free(line);
 	}
-	while (1)
+	while (ac)
 	{
-		ft_bzero(&map, sizeof(t_map));
-		ft_bzero(&token, sizeof(t_map));
-		ret = get_next_line(STDIN, &line);
-		// ft_putstr_fd(line, g_fderr);
-		get_map_dim(line, &map);
-		free(line);
-		get_map_content(&map);
-		get_next_line(STDIN, &line);
-		get_token_dim(line , &token);
-		free(line);
-		
-		f_get_token(&token);
-		ft_heatmap(&map, &token, player_num);
-		if (0 == ft_solve(&map, &token, 'O'))
-			break;
-		ft_putnbr_map(&map, g_fderr);
-		//ft_putstr_map(&token, g_fderr);
+		ft_setup(&map, &token, &player_num);
+		ft_solve(&map, &token, (player_num == 1 ? 'O' : 'X'));
+		free(map.content);
+		free(map.heatmap);
 	}
-	(void)ac;
-	close(g_fderr);
 	return (0);
 }

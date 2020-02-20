@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_heatmap.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/20 09:25:58 by fokrober          #+#    #+#             */
+/*   Updated: 2020/02/20 09:31:47 by fokrober         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "filler.h"
 
@@ -49,13 +60,12 @@ void    place_around(t_map *map, int index, int value)
         place_closer(map, index - map->cols, value);
 }
 
-void    ft_heatmap(t_map *map, t_map *token, int player)
+void    ft_heatmap(t_map *map, int player)
 {
     int     index;
     int     c;
     int     state;
     
-    (void)token;
     map->heatmap = ft_strdup(map->content);
     init_map(map, player);
     c = 1;
