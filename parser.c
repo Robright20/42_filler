@@ -6,13 +6,11 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:59:28 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/20 09:49:20 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/21 22:24:39 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-int	fderr;
 
 int		ft_isnumber(char *s)
 {
@@ -24,65 +22,12 @@ int		ft_isnumber(char *s)
 	return (!!s);
 }
 
-int		ft_tab2dlen(void *tab)
-{
-	int		i;
-
-	i = 0;
-	while (tab && *((void**)tab + i))
-		i++;
-	return (i);	
-}
-
-void	ft_memdel2d(void **mem)
-{
-	int		i;
-
-	i = 0;
-	if (mem)
-	{
-		while (mem[i])
-			free(mem[i++]);
-		free(mem);
-	}
-}
-
-void	ft_putstr_map(t_map *map, int stream)
-{
-	int		k;
-
-	k = 0;
-	while (k < map->size)
-	{
-		dprintf(stream, "[%.*s]\n", map->cols, &(map->content[k]));
-		k += map->cols;
-	}
-}
-
-void	ft_putnbr_map(t_map *map, int stream)
-{
-	int		k;
-	int		i;
-
-	k = 0;
-	while (k < map->size)
-	{
-		i = -1;
-		while (++i < map->cols)
-		{
-			dprintf(stream, "%3d", map->heatmap[k]);
-			k++;
-		}
-		ft_putstr_fd("\n", stream);
-	}
-}
-
 void	get_player_number(char *line, int *player_num, char *pname)
 {
 	static t_string expect = (t_string){"$$$ exec p", 10};
 	char			*s;
 	char			*str;
-	
+
 	s = ft_strnew(ft_strlen(pname) + 2);
 	ft_sprintf(s, "[%s]", pname);
 	str = ft_strchr(line, '[');
@@ -115,8 +60,7 @@ void	get_map_content(t_map *map)
 	char	*line;
 	int		i;
 
-	if (get_next_line(STDIN, &line) <= 0)
-		exit(EXIT_FAILURE);
+	get_next_line(STDIN, &line);
 	s = ft_strtrim(line);
 	i = map->rows;
 	if (map->cols == (int)ft_strlen(s) && ft_isnumber(s))
@@ -125,7 +69,8 @@ void	get_map_content(t_map *map)
 		free(line);
 		map->content = (char*)ft_memalloc(map->rows * map->cols + 1);
 		map->charset = MAP_CHARSET;
-		while (i-- && get_next_line(STDIN, &line) > 0 && (int)ft_strlen(line) > map->cols)
+		while (i-- && get_next_line(STDIN, &line) > 0 && \
+			(int)ft_strlen(line) > map->cols)
 		{
 			line[3] = '\0';
 			if (!(ft_isnumber(line) || !ft_validline(map->cols, &line[4])))
@@ -141,9 +86,9 @@ void	get_map_content(t_map *map)
 void	get_map_dim(char *line, t_map *map)
 {
 	static t_string expect = (t_string){"Plateau ", 8};
-	char	**tab;
-	char	*c;
-	int i;
+	char			**tab;
+	char			*c;
+	int				i;
 
 	i = expect.size;
 	c = ft_strchr(line, ':');
@@ -159,7 +104,7 @@ void	get_map_dim(char *line, t_map *map)
 			ft_memdel2d((void**)tab);
 		}
 	}
-	if (map->rows == 0 || map->cols == 0) 
+	if (map->rows == 0 || map->cols == 0)
 	{
 		ft_putstr_fd("error map !\n", STDERR);
 		exit(EXIT_FAILURE);

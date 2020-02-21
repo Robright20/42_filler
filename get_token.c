@@ -6,17 +6,17 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 23:16:20 by zael-mab          #+#    #+#             */
-/*   Updated: 2020/02/20 12:08:22 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/21 22:20:11 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void        f_get_token(t_map *token)
+void	f_get_token(t_map *token)
 {
 	char	*line;
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 
 	i = token->rows;
 	j = 0;
@@ -28,7 +28,7 @@ void        f_get_token(t_map *token)
 		while (line[j])
 		{
 			if (!(line[j] == '.' || line[j] == '*'))
-				exit (EXIT_FAILURE);
+				exit(EXIT_FAILURE);
 			j++;
 		}
 		ft_strcat(token->content, line);
@@ -39,8 +39,8 @@ void        f_get_token(t_map *token)
 void	get_token_dim(char *line, t_map *token)
 {
 	static t_string expect = (t_string){"Piece ", 6};
-	char	**tab;
-	char	*c;
+	char			**tab;
+	char			*c;
 
 	c = ft_strchr(line, ':');
 	if (c && ft_strncmp(expect.s, line, expect.size) == 0)
@@ -55,9 +55,22 @@ void	get_token_dim(char *line, t_map *token)
 			ft_memdel2d((void**)tab);
 		}
 	}
-	if (token->rows == 0 || token->cols == 0) 
+	if (token->rows == 0 || token->cols == 0)
 	{
 		ft_putstr_fd("error token !\n", STDERR);
 		exit(EXIT_FAILURE);
+	}
+}
+
+void	ft_memdel2d(void **mem)
+{
+	int		i;
+
+	i = 0;
+	if (mem)
+	{
+		while (mem[i])
+			free(mem[i++]);
+		free(mem);
 	}
 }

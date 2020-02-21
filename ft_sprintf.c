@@ -6,43 +6,45 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:51:09 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/19 15:53:30 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/21 23:26:52 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int     ft_sprintf(char *restrict str, const char *fmt, ...)
+void	ft_str_replace(char *str, const char *fmt, t_ivec3 *p, va_list ap)
 {
-    va_list ap;
-    int     start;
-    int     end;
-    int     size;
-    char    *s;
-    int     len;
+	int		len;
+	char	*s;
 
-    start = 0;
-    end = 0;
-    size = 0;
-    va_start(ap, fmt);
-    while (fmt[end])
-    {
-        if (!ft_strncmp(&fmt[end], "%s", 2))
-        {
-            ft_memcpy(&str[size], &fmt[start], end - start);
-            size += end - start;
-            start = end + 2;
-            end = start;
-            s = va_arg(ap, char *);
-            len = ft_strlen(s);
-            ft_memcpy(&str[size], s, len);
-            size += len;
-            continue ;
-        }
-        end++;
-    }
-    ft_memcpy(&str[size], &fmt[start], end - start);
-    size += end - start;
-    va_end(ap);
-    return (size);
+	ft_memcpy(&str[p->z], &fmt[p->x], p->y - p->x);
+	p->z += p->y - p->x;
+	p->x = p->y + 2;
+	p->y = p->x;
+	s = va_arg(ap, char *);
+	len = ft_strlen(s);
+	ft_memcpy(&str[p->z], s, len);
+	p->z += len;
+}
+
+int		ft_sprintf(char *restrict str, const char *fmt, ...)
+{
+	va_list ap;
+	t_ivec3	params;
+
+	va_start(ap, fmt);
+	params = (t_ivec3){0, 0, 0};
+	while (fmt[params.y])
+	{
+		if (!ft_strncmp(&fmt[params.y], "%s", 2))
+		{
+			ft_str_replace(str, fmt, &params, ap);
+			continue ;
+		}
+		params.y++;
+	}
+	ft_memcpy(&str[params.z], &fmt[params.x], params.y - params.x);
+	params.z += params.y - params.x;
+	va_end(ap);
+	return (params.z);
 }

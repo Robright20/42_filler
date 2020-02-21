@@ -6,7 +6,7 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:31:48 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/20 12:07:49 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/21 21:11:19 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	ft_putstr_map(t_map *map, int stream);
 void	ft_putnbr_map(t_map *map, int stream);
 void	get_token_dim(char *line, t_map *token);
 void    ft_heatmap(t_map *map, int player);
-int		ft_solve(t_map *map, t_map *token, int player);
+void	ft_solve(t_map *map, t_map *token, int player);
 int		get_next_move(t_map *map, t_ivec3 *next_move);
 int     ft_sprintf(char *restrict str, const char *fmt, ...);
+int		ft_tab2dlen(void *tab);
 #endif
