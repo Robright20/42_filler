@@ -38,7 +38,7 @@ class Parser
 		end
 	end
 	begin
-		@stdin, @stdout, @wait_thr = Open3.popen2("../viz/viz", "log.txt",
+		@stdin, @stdout, @wait_thr = Open3.popen2("./viz/viz", "log.txt",
 													  @maps_nb.to_s,
 													  @dim[:height].to_s,
 													  @dim[:width].to_s)

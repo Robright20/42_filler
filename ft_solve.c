@@ -6,7 +6,7 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 16:39:37 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/21 23:46:42 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/21 23:59:32 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,4 @@ void	ft_solve(t_map *map, t_map *token, int player)
 		}
 	}
 	ft_pput(STDOUT, best_pos.y - g_pad.y, best_pos.x - g_pad.x);
-	ft_pput(STDERR, best_pos.y - g_pad.y, best_pos.x - g_pad.x);
 }

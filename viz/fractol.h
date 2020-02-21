@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 19:18:35 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/07 00:12:53 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/21 23:58:34 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <OpenCL/opencl.h>
 # include <math.h>
 # include <string.h>
+# include "../filler.h"
 # define IMAGE_X 800
 # define IMAGE_Y 800
 # define WIN_X 1000
@@ -36,10 +37,9 @@ typedef struct s_set	t_set;
 typedef struct s_pixel	t_pixel;
 typedef struct s_point	t_point;
 typedef struct s_garb	t_garb;
-typedef struct s_fvec2	t_fvec2;
 typedef struct s_fvec4	t_fvec4;
 typedef struct s_ivec4	t_ivec4;
-typedef struct s_ivec2	t_ivec2;
+typedef struct s_fvec2	t_fvec2;
 typedef enum e_fractals	t_fractals;
 typedef enum e_key		t_key;
 
@@ -66,11 +66,6 @@ struct			s_fvec2
 {
 	double	x;
 	double	y;
-};
-struct			s_ivec2
-{
-	int		x;
-	int		y;
 };
 struct			s_fvec4
 {
