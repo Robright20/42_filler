@@ -6,7 +6,7 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 23:16:20 by zael-mab          #+#    #+#             */
-/*   Updated: 2020/02/21 22:20:11 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/22 02:48:40 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ void	ft_memdel2d(void **mem)
 			free(mem[i++]);
 		free(mem);
 	}
+}
+
+int		ft_tab2dlen(void *tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab && *((void**)tab + i))
+		i++;
+	return (i);
 }
