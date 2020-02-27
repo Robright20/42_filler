@@ -118,4 +118,6 @@ void	*ft_memjoin(void *s1, void const *s2,
 ssize_t	ft_memichr(const void *s, int c, size_t n);
 int		get_next_line(int fd, char **line);
 void	ft_lstpush2(t_list **elm_params, t_list *new_elm);
+void	ft_striteri2(char *s, void (*f)(unsigned int, char *, void *), void *m);
+void	ft_striter2(char *s, void (*f)(char *, void *), void *mem);
 #endif

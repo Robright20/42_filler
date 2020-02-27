@@ -23,3 +23,15 @@ void	ft_striter(char *s, void (*f)(char *))
 		}
 	}
 }
+
+void	ft_striter2(char *s, void (*f)(char *, void *), void *mem)
+{
+	if (s && f)
+	{
+		while (*s)
+		{
+			f(s, mem);
+			s++;
+		}
+	}
+}

@@ -25,3 +25,19 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 		}
 	}
 }
+
+void	ft_striteri2(char *s, void (*f)(unsigned int, char *, void *), void *p)
+{
+	int i;
+
+	if (s && f)
+	{
+		i = 0;
+		while (*s)
+		{
+			f(i, s, p);
+			s++;
+			i++;
+		}
+	}
+}

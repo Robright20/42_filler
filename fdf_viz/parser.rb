@@ -38,7 +38,7 @@ class Parser
 					@got_lines += 1
 				end
 			end
-			if (res = line.match /\.*\*+/)
+			if (res = line.match /[\.\*]+/)
 				data.puts res
 			elsif (res = line.match /.+got \((?<p>.)\): \[(?<y>\d+), (?<x>\d+)\]/)
 				data.puts "#{res[:p]} #{res[:x]} #{res[:y]}"
