@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 06:05:31 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/27 02:59:11 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/27 04:17:10 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,19 @@ int		ft_update(t_win *win)
 {
 	t_map		*map;
 	t_filler	*game;
-	static int	i;
+	int			end;
 
 	map = win->map;
 	game = (t_filler*)map->more;
-	if (i == 0)
+	end = 0;
+	if (game->moves)
 	{
-		draw_map(win->map, *win, 0);
-		i = 1;
-	}
-	else if (game->moves)
-	{
-		draw_move(win, game->moves->content);
 		if (((t_move*)game->moves->content)->pid == 'X')
 			g_score[0]++;
 		else if (((t_move*)game->moves->content)->pid == 'O')
 			g_score[1]++;
+		if (game->moves->next)
+			draw_move(win, game->moves->content);
 		game->moves = game->moves->next;
 	}
 	usleep(500);
