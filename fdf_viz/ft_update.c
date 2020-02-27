@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 06:05:31 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/27 02:45:55 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/27 02:59:11 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_update(t_win *win)
 	}
 	else if (game->moves)
 	{
-		draw_move(win, game->moves->content, g_proj);
+		draw_move(win, game->moves->content);
 		if (((t_move*)game->moves->content)->pid == 'X')
 			g_score[0]++;
 		else if (((t_move*)game->moves->content)->pid == 'O')

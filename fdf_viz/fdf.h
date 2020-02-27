@@ -100,5 +100,5 @@ int		ft_exit(t_win *window);
 void	filler_setup(t_map *map);
 int		ft_update(t_win *win);
 void	ft_put_banner(t_win *win, t_filler *game);
-void	draw_move(t_win *win, t_move *mv, int projection);
+void	draw_move(t_win *win, t_move *mv);
 #endif

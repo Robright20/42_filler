@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 04:18:57 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/27 01:36:08 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/27 02:59:02 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void		filler_setup(t_map *map)
 	ft_puts_move(game->moves);
 }
 
-void	draw_move(t_win *win, t_move *mv, int projection)
+void	draw_move(t_win *win, t_move *mv)
 {
 	t_map	*map;
 	int		i;
@@ -192,5 +192,5 @@ void	draw_move(t_win *win, t_move *mv, int projection)
 		map->tab[index].color = mv->tab[i].color;
 		i++;
 	}
-	draw_map(map, *win, projection);
+	draw_map(map, *win, g_proj);
 }
