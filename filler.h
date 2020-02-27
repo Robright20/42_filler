@@ -6,7 +6,7 @@
 /*   By: fokrober <robright28@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:31:48 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/21 21:11:19 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/27 06:38:56 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define MAP_CHARSET ".xXoO"
 # define TOKEN_CHARSET "*"
 # define MAX_INT 2147483647
-#include <errno.h>
+# include <errno.h>
 
 typedef struct s_map		t_map;
 typedef struct s_ivec2		t_ivec2;
@@ -63,9 +63,9 @@ void	ft_memdel2d(void **mem);
 void	ft_putstr_map(t_map *map, int stream);
 void	ft_putnbr_map(t_map *map, int stream);
 void	get_token_dim(char *line, t_map *token);
-void    ft_heatmap(t_map *map, int player);
+void	ft_heatmap(t_map *map, int player);
 void	ft_solve(t_map *map, t_map *token, int player);
 int		get_next_move(t_map *map, t_ivec3 *next_move);
-int     ft_sprintf(char *restrict str, const char *fmt, ...);
+int		ft_sprintf(char *restrict str, const char *fmt, ...);
 int		ft_tab2dlen(void *tab);
 #endif

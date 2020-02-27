@@ -6,7 +6,7 @@
 /*   By: fokrober <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 06:05:31 by fokrober          #+#    #+#             */
-/*   Updated: 2020/02/27 04:17:10 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/27 06:03:49 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ void	ft_put_banner(t_win *win, t_filler *game)
 {
 	if (game)
 	{
+		mlx_clear_window(win->mlx_ptr, win->win_ptr);
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 260, 40, \
-				game->p[0][0] == 'X' ? 0x0000ff00 : 0x00ff0000, game->p[0]);
+				game->p[0][0] == 'X' ? GREEN : RED, game->p[0]);
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 310, 80, \
-				game->p[0][0] == 'X' ? 0x0000ff00 : 0x00ff0000, ft_itoa(g_score[0]));
+				game->p[0][0] == 'X' ? GREEN : RED, ft_itoa(g_score[0]));
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 560, 40, \
-				game->p[1][0] == 'O' ? 0x00ff0000 : 0x0000ff00, game->p[1]);
+				game->p[1][0] == 'O' ? RED : GREEN, game->p[1]);
 		mlx_string_put(win->mlx_ptr, win->win_ptr, 610, 80, \
-				game->p[1][0] == 'O' ? 0x00ff0000 : 0x0000ff00, ft_itoa(g_score[1]));
+				game->p[1][0] == 'O' ? RED : GREEN, ft_itoa(g_score[1]));
 	}
 }

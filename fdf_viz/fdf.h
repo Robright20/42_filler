@@ -6,7 +6,7 @@
 /*   By: ielouazz <ielouazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 20:57:12 by ielouazz          #+#    #+#             */
-/*   Updated: 2020/02/26 16:48:20 by fokrober         ###   ########.fr       */
+/*   Updated: 2020/02/27 06:35:53 by fokrober         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,21 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# define TRANS_X (WIN_X / 2 - (map->width * scale) / 2)
-# define TRANS_Y (WIN_Y / 2 - (map->len * scale) / 2)
 # define SCALE (500 / map->width)
+# define TRANS_X (WIN_X / 2 - (map->width * SCALE) / 2)
+# define TRANS_Y (WIN_Y / 2 - (map->len * SCALE) / 2)
+# define RED 0x00ff0000
+# define GREEN 0x0000ff00
+# define BLUE 0x000000ff
+# define WHITE 0x00ffffff
 
-typedef	struct s_win	t_win;
-typedef struct s_point	t_point;
-typedef	struct s_map	t_map;
-typedef struct s_incr	t_incr;
-typedef	struct s_filler t_filler;
-typedef	struct s_move	t_move;
-typedef	struct s_ivec2	t_ivec2;
+typedef	struct s_win		t_win;
+typedef struct s_point		t_point;
+typedef	struct s_map		t_map;
+typedef struct s_incr		t_incr;
+typedef	struct s_filler		t_filler;
+typedef	struct s_move		t_move;
+typedef	struct s_ivec2		t_ivec2;
 
 struct	s_win
 {

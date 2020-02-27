@@ -19,8 +19,8 @@ class Parser
 
 	@got_lines = 0
 	@dim = {:rows => 0, :cols => 0}
-	File.open("filler.map", "w") do |f|
-		data = File.open("filler.data", "w")
+	File.open("fdf_viz/filler.map", "w") do |f|
+		data = File.open("fdf_viz/filler.data", "w")
 		ARGF.read.each_line do |file|
 			line = file.to_s
 			if (@got_lines == 0 || @got_lines < @dim[:rows].to_i)
@@ -41,13 +41,17 @@ class Parser
 			if (res = line.match /\.*\*+/)
 				data.puts res
 			elsif (res = line.match /.+got \((?<p>.)\): \[(?<y>\d+), (?<x>\d+)\]/)
-				data.puts "#{res[:p]} #{res[:x]} #{res[:y]}"
+				if (res[:x].to_i != 0 || res[:y].to_i != 0)
+					data.puts "#{res[:p]} #{res[:x]} #{res[:y]}"
+				elsif (res[:p] == 'O')
+					data.puts "#{res[:p]} #{res[:x]} #{res[:y]}"
+				end
 			end
 		end
 		data.close
 	end
 	begin
-		@stdin, @stdout, @wait_thr = Open3.popen2("./fdf/fdf", "filler.map")
+		@stdin, @stdout, @wait_thr = Open3.popen2("./fdf_viz/fdf", "./fdf_viz/filler.map")
 		puts "launched viz"
 	rescue
 		puts "error:"
